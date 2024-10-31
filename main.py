@@ -1,4 +1,4 @@
-"""This module calculates the minimum number of transport platforms.
+"""Calculates the minimum number of transport platforms.
 
 A rover on Mars must transport these robots to specific locations on
 the planet's surface. To achieve this, it has access to an unlimited
@@ -56,13 +56,12 @@ def optimal_number_of_platforms(
              without exceeding
         the weight limit of each platform.
     """
-
     # Sort weight of objects.
-    objects_weight.sort()
+    sorted_objects = sorted(objects_weight)
 
     # Left and right pointers indexes.
     left_pointer = 0
-    right_pointer = len(objects_weight) - 1
+    right_pointer = len(sorted_objects) - 1
 
     # A counter for the number of platforms
     # required to transport all objects.
@@ -73,26 +72,16 @@ def optimal_number_of_platforms(
 
         # Summarizes objects from two different points in the array.
         sum_of_two_of_objects = (
-                objects_weight[left_pointer]
-                + objects_weight[right_pointer])
+                sorted_objects[left_pointer]
+                + sorted_objects[right_pointer])
 
-        # Checks if the sum of objects is greater than the limit.
-        equality_check = sum_of_two_of_objects > limit_by_platform
+        # Checks if the sum of objects isn't greater than the limit.
+        # If True move left pointer.
+        if sum_of_two_of_objects <= limit_by_platform:
+            left_pointer += 1
 
-        # If equality_check True and one of the objects is larger
-        # than the other, truncates the index of that object.
-        # Else, both indexes are cut.
-        if (equality_check
-                and objects_weight[left_pointer]
-                > objects_weight[right_pointer]):
-            left_pointer += 1
-        elif (equality_check
-                and objects_weight[left_pointer]
-                <= objects_weight[right_pointer]):
-            right_pointer -= 1
-        else:
-            left_pointer += 1
-            right_pointer -= 1
+        # Move right pointer.
+        right_pointer -= 1
 
         # Increases the platform counter.
         platforms_counter += 1
@@ -102,10 +91,12 @@ def optimal_number_of_platforms(
 
 
 def main():
-    """Main function"""
+    """Main function."""
     # Requests robot weights with a space and converts to
     # a list with elements of type int.
-    weight_of_robots = list(map(int, sys.stdin.readline().split()))
+    robots = sys.stdin.readline().split()
+
+    weight_of_robots = list(int(weight) for weight in robots)
 
     # Requests the maximum weight carried by the platform.
     weight_limit = int(sys.stdin.readline().rstrip())

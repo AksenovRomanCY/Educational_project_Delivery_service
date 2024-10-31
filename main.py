@@ -1,4 +1,6 @@
-"""Calculates the minimum number of transport platforms.
+""" Calculates the minimum number of transport platforms.
+
+ID_YANDEX_CONTEST: 123163492
 
 A rover on Mars must transport these robots to specific locations on
 the planet's surface. To achieve this, it has access to an unlimited
@@ -96,6 +98,7 @@ def main():
     # a list with elements of type int.
     robots = sys.stdin.readline().split()
 
+    # Create a list with weights in integers
     weight_of_robots = list(int(weight) for weight in robots)
 
     # Requests the maximum weight carried by the platform.

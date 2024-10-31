@@ -55,8 +55,7 @@ def optimal_number_of_platforms(
 
     Returns:
         int: Minimum number of platforms required to carry all objects
-             without exceeding
-        the weight limit of each platform.
+             without exceeding the weight limit of each platform.
     """
     # Sort weight of objects.
     sorted_objects = sorted(objects_weight)
@@ -94,8 +93,7 @@ def optimal_number_of_platforms(
 
 def main():
     """Main function."""
-    # Requests robot weights with a space and converts to
-    # a list with elements of type int.
+    # Requests robot weights with a space and converts to list
     robots = sys.stdin.readline().split()
 
     # Create a list with weights in integers
